@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/erdincmutlu/go-react-todo/server/middleware"
+	"github.com/erdincmutlu/go-react-todo/middleware"
 	"github.com/gorilla/mux"
 )
 
