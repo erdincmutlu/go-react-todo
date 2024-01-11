@@ -1,3 +1,3 @@
-module github.com/erdincmutlu/go-react-todo
+module github.com/erdincmutlu/go-react-todo/server
 
 go 1.21.4
