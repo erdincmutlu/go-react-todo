@@ -142,7 +142,15 @@ func insertOneTask(task models.ToDoList) {
 }
 
 func taskComplete(taskId string) {
+	id, _ := primitive.ObjectIDFromHex(taskId)
+	filter := bson.M{"_id": id}
+	update := bson.M{"$set": bson.M{"status": true}}
 
+	result, err := collection.UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("modified count: %d", result.ModifiedCount)
 }
 
 func undoTask(taskId string) {
