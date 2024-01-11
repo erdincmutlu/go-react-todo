@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -50,7 +51,10 @@ func createDBInstance() {
 }
 
 func GetAllTasks(w http.ResponseWriter, r *http.Request) {
-
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	alltasks := getAllTasks()
+	json.NewEncoder(w).Encode(alltasks)
 }
 
 func CreateTask(w http.ResponseWriter, r *http.Request) {
