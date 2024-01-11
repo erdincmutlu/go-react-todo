@@ -11,6 +11,7 @@ import (
 	"github.com/erdincmutlu/go-react-todo/models"
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -104,10 +105,13 @@ func DeleteTask(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteAllTasks(w http.ResponseWriter, r *http.Request) {
-
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	count := deleteAllTasks()
+	json.NewEncoder(w).Encode(count)
 }
 
-func getAllTasks() []models.ToDoList {
+func getAllTasks() []primitive.M {
 	return nil
 }
 
@@ -125,4 +129,8 @@ func undoTask(taskId string) {
 
 func deleteOneTask(taskId string) {
 
+}
+
+func deleteAllTasks() int {
+	return 0
 }
