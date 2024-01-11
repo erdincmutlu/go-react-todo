@@ -138,7 +138,12 @@ func getAllTasks() []primitive.M {
 }
 
 func insertOneTask(task models.ToDoList) {
+	result, err := collection.InsertOne(context.Background(), task)
+	if err != nil {
+		log.Fatal(err)
+	}
 
+	fmt.Printf("Inserted a single task: %s", result.InsertedID)
 }
 
 func taskComplete(taskId string) {
@@ -150,7 +155,7 @@ func taskComplete(taskId string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("modified count: %d", result.ModifiedCount)
+	fmt.Printf("modified count: %d\n", result.ModifiedCount)
 }
 
 func undoTask(taskId string) {
