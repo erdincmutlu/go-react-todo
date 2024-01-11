@@ -159,7 +159,15 @@ func taskComplete(taskId string) {
 }
 
 func undoTask(taskId string) {
+	id, _ := primitive.ObjectIDFromHex(taskId)
+	filter := bson.M{"_id": id}
+	update := bson.M{"$set": bson.M{"status": false}}
 
+	result, err := collection.UpdateOne(context.Background(), filter, update)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("modified count: %d\n", result.ModifiedCount)
 }
 
 func deleteOneTask(taskId string) {
