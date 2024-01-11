@@ -182,5 +182,10 @@ func deleteOneTask(taskId string) {
 }
 
 func deleteAllTasks() int {
-	return 0
+	result, err := collection.DeleteMany(context.Background(), bson.D{{}}, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Deleted document: %d\n", result.DeletedCount)
+	return int(result.DeletedCount)
 }
