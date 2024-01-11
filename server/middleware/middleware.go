@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/erdincmutlu/go-react-todo/models"
 	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -58,7 +59,15 @@ func GetAllTasks(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateTask(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
+	var task models.ToDoList
+	json.NewDecoder(r.Body).Decode(&task)
+	insertOneTask(task)
+	json.NewEncoder(w).Encode(task)
 }
 
 func TaskComplete(w http.ResponseWriter, r *http.Request) {
