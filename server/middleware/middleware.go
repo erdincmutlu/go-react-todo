@@ -171,7 +171,14 @@ func undoTask(taskId string) {
 }
 
 func deleteOneTask(taskId string) {
+	id, _ := primitive.ObjectIDFromHex(taskId)
+	filter := bson.M{"_id": id}
 
+	result, err := collection.DeleteOne(context.Background(), filter)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("Deleted document: %d\n", result.DeletedCount)
 }
 
 func deleteAllTasks() int {
