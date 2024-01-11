@@ -94,7 +94,13 @@ func UndoTask(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteTask(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
+	params := mux.Vars(r)
+	deleteOneTask(params["id"])
 }
 
 func DeleteAllTasks(w http.ResponseWriter, r *http.Request) {
@@ -114,5 +120,9 @@ func taskComplete(taskId string) {
 }
 
 func undoTask(taskId string) {
+
+}
+
+func deleteOneTask(taskId string) {
 
 }
