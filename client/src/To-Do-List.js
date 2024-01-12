@@ -18,6 +18,12 @@ class ToDoList extends Component {
     this.getTask();
   }
 
+  onChange = (event) => {
+    this.setState({
+        [event.target.name]: event.target.value,
+    });
+  };
+
   render() {
     return (
       <div>
@@ -36,7 +42,11 @@ class ToDoList extends Component {
               fluid
               placeholder="Create Task"
               />
+            {/*<Button> Create Task </Button>*/}
             </Form>
+        </div>
+        <div className="row">
+            <Card.Group>{this.state.items}</Card.Group>
         </div>
       </div>
     );
