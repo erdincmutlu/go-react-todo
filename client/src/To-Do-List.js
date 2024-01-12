@@ -95,6 +95,17 @@ class ToDoList extends Component {
     })
   }
 
+  deleteTask = (id) => {
+    axios.delete(endpoint + "/api/deleteTask/" + id, {
+      headers: {
+        "Content-Type": "application/x-ww-form-urlencoded",
+      },
+    }).then((res) => {
+      console.log(res);
+      this.getTask();
+    })
+  }
+
   render() {
     return (
       <div>
